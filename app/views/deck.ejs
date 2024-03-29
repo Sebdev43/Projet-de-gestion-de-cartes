@@ -1,0 +1,24 @@
+<%- include('header') %>
+
+<h1>Votre Deck</h1>
+
+<div class="cardsContainer">
+    <% if (deck && deck.length > 0) { %>
+        <ul>
+          <% deck.forEach(card => { %>
+            <div class="card">
+            <li>
+                <img src="/visuals/<%= card.visual_name %>" alt="<%= card.name %> illustration">
+              <span><%= card.name %> - Élément: <%= card.element || 'Aucun' %></span>
+              
+              <a href="/remove-from-deck/<%= card.id %>">Supprimer du deck</a>
+            </li>
+        </div>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>Votre deck est vide.</p>
+      <% } %>
+</div>
+
+<%- include('footer') %>

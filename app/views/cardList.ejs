@@ -6,11 +6,11 @@
   <% cards.forEach( (card) => { %>
 
     <div class="card">
-      <a href="#">
+      <a href="/card/<%= card.id %>">
         <img src="/visuals/<%= card.visual_name %>" alt="<%= card.name %> illustration">
         <p class="cardName"><%= card.name %></p>
       </a>
-      <a class="link--addCard" title="Ajouter au deck" href="/card/<%= card.id %>">[ + ]</a>
+      <a class="link--addCard" title="Ajouter au deck" href="/add-to-deck/<%= card.id %>">[ + ]</a>
     </div>
 
   <% }) %>

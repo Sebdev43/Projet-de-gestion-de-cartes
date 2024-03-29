@@ -23,6 +23,13 @@ const dataMapper = {
     return result.rows;
     //Cette méthode permet de gérer le cas spécial ou l'utilisateur souhaite trouver des cartes sans élément (`element === 'aucun'`)
   },
+
+  async getCardsByIds(cardIds) {
+    const query = 'SELECT * FROM card WHERE id = ANY($1)';
+    const values = [cardIds];
+    const result = await database.query(query, values);
+    return result.rows;
+  },
 };
 
 
