@@ -1,0 +1,15 @@
+<%- include('header') %>
+<h1><%= card.name %></h1>
+<section class="cardsContainer">
+    
+    <img src="/visuals/<%= card.visual_name %>" alt="<%= card.name %> illustration">
+    <ul class="cardName">
+        <li>Niveau: <%= card.level %></li>
+        <li>Element: <%= card.element ? card.element : 'Aucun' %></li>
+        <li>Valeurs: Nord: <%= card.value_north %>, Est: <%= card.value_east %>, Sud: <%= card.value_south %>, Ouest: <%= card.value_west %></li>
+    </ul>
+</section>
+<a href="/">Retour à la liste des cartes</a>
+
+
+<%- include('footer') %>
