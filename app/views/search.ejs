@@ -53,19 +53,47 @@
   <input type="text" name="name" id="name" />
   <input type="submit" value="Chercher" />
 </form>
-<% if (searchType && cards) { %> <% if (searchType === 'element') { %>
-<h3>Résultats de la recherche par élément</h3>
-<% if (cards.length > 0) { %>
-<ul>
-  <% cards.forEach(card => { %>
-  <li>
-    <%= card.name %> - Elément : <%= card.element ? card.element : 'aucun' %>
-  </li>
-  <% }) %>
-</ul>
-<% } else { %>
-<p>Aucune carte trouvée pour cet élément.</p>
-<% } %> 
-<% } %> 
-<% } %> 
+<% if (searchType && cards) { %>
+  <% if (searchType === 'element') { %>
+    <h3>Résultats de la recherche par élément</h3>
+    <!-- Affichage des résultats pour recherche par élément -->
+  <% } else if (searchType === 'level') { %>
+    <h3>Résultats de la recherche par niveau</h3>
+    <!-- Affichage des résultats pour recherche par niveau -->
+    <% if (cards.length > 0) { %>
+      <ul>
+        <% cards.forEach(card => { %>
+        <li><%= card.name %> - Niveau : <%= card.level %></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>Aucune carte trouvée pour ce niveau.</p>
+    <% } %>
+  <% } else if (searchType === 'values') { %>
+    <h3>Résultats de la recherche par valeur</h3>
+   
+    <% if (cards.length > 0) { %>
+      <ul>
+        <% cards.forEach(card => { %>
+        <li><%= card.name %> - Valeur : <%= card.values %></li> 
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>Aucune carte trouvée pour cette valeur.</p>
+    <% } %>
+  <% } else if (searchType === 'name') { %>
+    <h3>Résultats de la recherche par nom</h3>
+    
+    <% if (cards.length > 0) { %>
+      <ul>
+        <% cards.forEach(card => { %>
+        <li><%= card.name %> - Elément : <%= card.element ? card.element : 'aucun' %></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>Aucune carte trouvée pour ce nom.</p>
+    <% } %>
+  <% } %>
+<% } %>
+
 <%- include('footer') %>

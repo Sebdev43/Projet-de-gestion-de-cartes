@@ -30,6 +30,51 @@ const dataMapper = {
     const result = await database.query(query, values);
     return result.rows;
   },
+
+  async searchCardsByLevel(level) {
+    const query = 'SELECT * FROM card WHERE level = $1';
+    const values = [level];
+    const result = await database.query(query, values);
+    return result.rows;
+  },
+  async searchCardsByValue(direction, value) {
+   
+    let columnName;
+    switch(direction) {
+      case 'north':
+        columnName = 'value_north';
+        break;
+      case 'east':
+        columnName = 'value_east';
+        break;
+      case 'south':
+        columnName = 'value_south';
+        break;
+      case 'west':
+        columnName = 'value_west';
+        break;
+      default:
+        throw new Error("Direction invalide");
+    }
+  
+    const query = `SELECT * FROM card WHERE ${columnName} >= $1`;
+    const values = [value];
+    
+    try {
+      const result = await database.query(query, values);
+      return result.rows;
+    } catch (error) {
+      console.error("Erreur lors de la recherche par valeur :", error);
+      throw error; 
+    }
+  },
+  async searchCardsByName(name) {
+    const query = "SELECT * FROM card WHERE name ILIKE $1";
+    const values = [`%${name}%`];
+    const result = await database.query(query, values);
+    return result.rows;
+  },
+  
 };
 
 

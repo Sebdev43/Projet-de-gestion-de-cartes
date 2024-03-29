@@ -19,7 +19,39 @@ const searchController = {
       console.error(error);
       res.status(500).send(`An error occurred: ${error.message}`);
     }
-  }
+  },
+  searchByLevel: async (req, res) => {
+    try {
+      const {level} = req.query;
+      const cards = await dataMapper.searchCardsByLevel(level);
+      res.render('search', { cards, searchType: 'level' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send(`An error occurred: ${error.message}`);
+    }
+  },
+  searchByValue: async (req, res) => {
+    try {
+      const { direction, value } = req.query;
+      const cards = await dataMapper.searchCardsByValue(direction, parseInt(value, 10));
+      console.log(`Recherche par valeur, Direction: ${direction}, Valeur: ${value}`);
+
+      res.render('search', { cards, searchType: 'values' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send(`An error occurred: ${error.message}`);
+    }
+  },
+  searchByName: async (req, res) => {
+    try {
+      const { name } = req.query;
+      const cards = await dataMapper.searchCardsByName(name);
+      res.render('search', { cards, searchType: 'name'});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send(`An error occurred: ${error.message}`);
+    }
+  },
 };
 
 
